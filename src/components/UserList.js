@@ -1,6 +1,11 @@
 import React, {useEffect}  from 'react'
 import {fetchAllUsers} from '../store/slices/users';
 import {useDispatch, useSelector} from 'react-redux'
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography';
+
 
 const UserList = () => {
 
@@ -13,22 +18,22 @@ const UserList = () => {
     }, [dispatch])
 
   return (
-    <div className='container mt-4'>
-        <div className='row'>
+        <Grid container style={{justifyContent: "center"}} spacing={3}>
             {
             users.map((user, index) => (
-                <div key={index} className='col-md-3 mb-4'>
-                    <div className='card'>
-                        <img src={user.avatar} alt="avatar"/>
-                        <div className='card-body'> 
-                        <h5 className='card-title'>{`${user.first_name} ${user.last_name}`}</h5>
-                        <p className='card-text'>{user.email}</p>
-                        </div>
-                    </div>
-                </div>
+                <Grid item key={index} xl={3}>
+                    <Card variant="outlined" style={{minHeight: "225px", minWidth:"300px",background:"lightgray", borderRadius:"18px"}}>
+                        <Container>
+                            <img src={user.avatar} alt="avatar"/>   
+                        </Container>
+                        <Container>
+                            <Typography variant="h4" > {`${user.first_name} ${user.last_name}`} </Typography>
+                            <Typography variant="h6" mb={1}> {user.email} </Typography>
+                        </Container>
+                        </Card>
+                </Grid>
             ))}
-        </div>
-    </div>
+        </Grid>
   )
 }
 
